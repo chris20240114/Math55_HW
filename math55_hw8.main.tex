@@ -1,0 +1,253 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{enumitem}
+\setlist[enumerate]{itemsep=0.35em, topsep=0.35em}
+\newcommand{\ds}{\displaystyle}
+
+\begin{document}
+
+\begin{center}
+{\Large \textbf{Math 55 — HW 8: Questions \& Step–by–Step Solutions}}\\[3pt]
+\small (Rosen §5.1: 6, 16, 22, 62, 64, 76; Rosen §5.2: 8, 10, 14; Hutchings §4: 2)
+\end{center}
+
+\bigskip
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Rosen §5.1 — Mathematical Induction}
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+
+\item \textbf{(6)} Prove that for all positive integers $n$,
+\[
+1\cdot 1!+2\cdot 2!+\cdots+n\cdot n!=(n+1)!-1.
+\]
+
+\textit{Proof (by induction on $n$).}
+\textbf{Base case ($n=1$).} LHS $=1\cdot1!=1$, RHS $=(1+1)!-1=2!-1=2-1=1$. Holds.
+
+\textbf{Inductive hypothesis.} Assume for some $n\ge1$,
+\[
+\sum_{k=1}^{n} k\,k!=(n+1)!-1.
+\]
+
+\textbf{Inductive step ($n\to n+1$).}
+\begin{align*}
+\sum_{k=1}^{n+1} k\,k!
+&=\Big(\sum_{k=1}^{n} k\,k!\Big)+(n+1)(n+1)! \\
+&=(n+1)!-1 + (n+1)(n+1)! \quad\text{(by IH)}\\
+&=(n+1)! \big(1+n+1\big)-1\\
+&=(n+2)(n+1)!-1\\
+&=(n+2)!-1.
+\end{align*}
+Thus the statement holds for $n+1$. By induction, true for all $n\ge1$. 
+
+\bigskip
+
+\item \textbf{(16)} Prove that for all $n\ge 1$,
+\[
+\sum_{k=1}^{n} k(k+1)(k+2)=\frac{n(n+1)(n+2)(n+3)}{4}.
+\]
+
+\textit{Proof (by induction on $n$).}
+\textbf{Base case ($n=1$).} LHS $=1\cdot2\cdot3=6$. RHS $=\frac{1\cdot2\cdot3\cdot4}{4}=6$. Holds.
+
+\textbf{Inductive hypothesis.} Assume
+\[
+\sum_{k=1}^{n} k(k+1)(k+2)=\frac{n(n+1)(n+2)(n+3)}{4}.
+\]
+
+\textbf{Inductive step.}
+\begin{align*}
+\sum_{k=1}^{n+1} k(k+1)(k+2)
+&=\frac{n(n+1)(n+2)(n+3)}{4} + (n+1)(n+2)(n+3)\\
+&=\frac{(n+1)(n+2)(n+3)}{4}\big(n+4\big) \\
+&=\frac{(n+1)(n+2)(n+3)(n+4)}{4}.
+\end{align*}
+This equals the RHS with $n\mapsto n+1$. 
+
+\bigskip
+
+\item \textbf{(22)} Determine all nonnegative integers $n$ for which $n^2\le n!$ and prove it.
+
+\textit{Solution.} Direct check:
+\[
+n=0:\ 0\le 1;\quad
+n=1:\ 1\le 1;\quad
+n=2:\ 4\le 2\ \text{(false)};\quad
+n=3:\ 9\le 6\ \text{(false)};\quad
+n=4:\ 16\le 24\ \text{(true)}.
+\]
+We claim $n^2\le n!$ for $n=0,1$ and all $n\ge4$.
+
+\textit{Proof (by induction for $n\ge4$).}
+\textbf{Base $n=4$} holds as above.
+\textbf{IH:} Assume $n^2\le n!$ for some $n\ge4$.
+\textbf{Step:}
+\[
+(n+1)^2 \le (n+1)\cdot n! \quad\text{since } n!\ge n^2 \text{ and } n+1\ge 5>1,
+\]
+and $(n+1)\,n!=(n+1)!$. Hence $(n+1)^2\le (n+1)!$. 
+
+\bigskip
+
+\item \textbf{(62)} Show that $n$ lines in general position (no two parallel, no three concurrent) divide the plane into
+\[
+R_n=\frac{n^2+n+2}{2}
+\]
+regions.
+
+\textit{Proof (by induction on $n$).}
+\textbf{Base $n=0$.} No lines: $R_0=1$ region, and $\frac{0+0+2}{2}=1$. Holds.
+
+\textbf{Inductive hypothesis.} Suppose $R_{n-1}=1+\frac{(n-1)n}{2}$.
+
+\textbf{Inductive step.} The $n$-th line intersects the previous $n-1$ lines at distinct points, hence is cut into $n$ segments and creates $n$ new regions:
+\[
+R_n=R_{n-1}+n
+= \Big(1+\frac{(n-1)n}{2}\Big)+n
+=1+\frac{n(n+1)}{2}
+=\frac{n^2+n+2}{2}.
+\]
+
+
+\bigskip
+
+\item \textbf{(64)} If $p$ is prime and $p\mid a_1a_2\cdots a_n$, then $p\mid a_i$ for some $i$.
+
+\textit{Proof (by induction on $n$).}
+\textbf{Base $n=2$.} Euclid’s Lemma: if $p$ prime and $p\mid ab$, then $p\mid a$ or $p\mid b$.
+
+\textbf{Inductive hypothesis.} Assume the statement is true for $n-1$.
+
+\textbf{Inductive step.} If $p\mid (a_1\cdots a_{n-1})a_n$, then by the $n=2$ case either $p\mid a_n$ or $p\mid a_1\cdots a_{n-1}$. In the latter case, by the IH, $p\mid a_i$ for some $i\le n-1$. Hence $p\mid a_i$ for some $i$. 
+
+\bigskip
+
+\item \textbf{(76)} Prove for all integers $n\ge1$,
+\[
+\prod_{k=1}^{n}\frac{2k-1}{2k} < \frac{1}{\sqrt{3n}}.
+\]
+Explain why a naive induction attempt fails, then prove the stronger
+\[
+\prod_{k=1}^{n}\frac{2k-1}{2k} \le \frac{1}{\sqrt{3n+1}}\qquad(\star).
+\]
+
+\textit{Why naive induction fails.} Let $P(n):\ \prod_{k=1}^{n}\frac{2k-1}{2k}<\frac1{\sqrt{3n}}$.
+From $P(n)$,
+\[
+\prod_{k=1}^{n+1}\frac{2k-1}{2k}
+=\Big(\prod_{k=1}^{n}\frac{2k-1}{2k}\Big)\frac{2n+1}{2n+2}
+<\frac{1}{\sqrt{3n}}\cdot \frac{2n+1}{2n+2}.
+\]
+To deduce $P(n+1)$, we would need 
+\(
+\frac{2n+1}{2n+2}\cdot \frac1{\sqrt{3n}}\le \frac1{\sqrt{3n+3}},
+\)
+which is \emph{false} for small $n$ and in general lacks uniform slack.
+
+\textit{Proof of $(\star)$ (by induction).}
+\textbf{Base $n=1$.} $\frac12=\frac1{\sqrt{4}}$.
+
+\textbf{Inductive hypothesis.} Assume $\prod_{k=1}^{n}\frac{2k-1}{2k}\le(3n+1)^{-1/2}$.
+
+\textbf{Inductive step.}
+\[
+\prod_{k=1}^{n+1}\frac{2k-1}{2k}
+\le \frac{1}{\sqrt{3n+1}}\cdot \frac{2n+1}{2n+2}
+\stackrel{(\dagger)}{\le} \frac{1}{\sqrt{3n+4}},
+\]
+where $(\dagger)$ is equivalent (after squaring and cross-multiplying positive terms) to
+\[
+(2n+1)^2(3n+4)\le (2n+2)^2(3n+1),
+\]
+which expands to $12n^3+28n^2+19n+4 \le 12n^3+28n^2+20n+4$, true since the RHS exceeds the LHS by $n\ge0$.
+Thus $(\star)$ holds for all $n\ge1$, and since $(3n+1)^{-1/2}\le (3n)^{-1/2}$, the original inequality follows. 
+
+\end{enumerate}
+
+\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Rosen §5.2 — Induction and Recursion}
+
+\begin{enumerate}[label=\textbf{\arabic*.},resume]
+
+\item \textbf{(8)} Gift certificates of \$25 and \$40. Determine all attainable totals and prove your claim by strong induction.
+
+\textit{Claim.} A total $T$ is attainable iff $T$ is a multiple of \$5 and $T\ge 140$.
+
+\textit{Proof.}
+\textbf{Necessity.} Any $T=25a+40b=5(5a+8b)$ is a multiple of \$5.
+
+\textbf{Sufficiency (strong induction on $T$ over multiples of \$5).}
+We give bases covering all residues mod \$25 for $T\ge 140$:
+\[
+\begin{array}{c|ccccc}
+T\ (\bmod 25) & 0 & 5 & 10 & 15 & 20\\\hline
+\text{base} & 150=6(25) & 155=3(25)+2(40) & 160=4(40) & 140=4(25)+40 & 145=25+3(40)
+\end{array}
+\]
+\textbf{Inductive step.} Suppose every multiple of \$5 in $[140,\,T]$ is attainable. Then $T+25$ is attainable by adding one \$25 certificate. Hence every multiple of \$5 at least \$140 is attainable. 
+
+\bigskip
+
+\item \textbf{(10)} A chocolate bar consists of $n$ unit squares in a rectangle. Each break splits one rectangular piece into two along grid lines. Show that exactly $n-1$ breaks are necessary and sufficient to obtain $n$ single squares.
+
+\textit{Proof.}
+\textbf{Necessity.} Each break increases the number of pieces by exactly $1$. Starting from 1 piece ending at $n$ pieces needs at least $n-1$ breaks.
+
+\textbf{Sufficiency (strong induction on $n$).}
+\textbf{Base $n=1$:} 0 breaks $=1-1$.  
+\textbf{Inductive step:} Assume any bar with $<n$ squares can be reduced to single squares in (number of squares)$-1$ breaks. Take a bar with $n$ squares and make one break, producing rectangular pieces with $r$ and $s$ squares ($r+s=n$). By the hypothesis, these can be fully split using $(r-1)+(s-1)$ more breaks. Total $=1+(r-1)+(s-1)=n-1$. 
+
+\bigskip
+
+\item \textbf{(14)} Begin with a pile of $n$ stones. When a pile of $r+s$ stones is split into $r$ and $s$, record $rs$. Show that the sum of all recorded products is always $\ds \frac{n(n-1)}{2}$.
+
+\textit{Proof (strong induction on $n$).}
+\textbf{Base $n=1$.} No split, total $0=\frac{1\cdot0}{2}$.  
+\textbf{Inductive step.} Assume true for all $<n$. First split $n=r+s$ contributes $rs$. By the hypothesis, finishing the two subpiles contributes $\frac{r(r-1)}{2}+\frac{s(s-1)}{2}$. Total:
+\[
+rs+\frac{r(r-1)}{2}+\frac{s(s-1)}{2}
+=\frac{(r+s)^2-(r+s)}{2}
+=\frac{n(n-1)}{2}.
+\]
+
+
+\end{enumerate}
+
+\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Hutchings §4}
+
+\begin{enumerate}[label=\textbf{\arabic*.},resume]
+
+\item Guess a formula for
+\[
+\frac{1}{1\cdot 2}+\frac{1}{2\cdot 3}+\cdots+\frac{1}{n(n+1)}
+\]
+and prove it by induction.
+
+\textit{Solution.} Note
+\[
+\frac{1}{k(k+1)}=\frac{1}{k}-\frac{1}{k+1}.
+\]
+\textbf{Claim.} $\ds \sum_{k=1}^n \frac{1}{k(k+1)}=\frac{n}{n+1}$.
+
+\textit{Proof (by induction).}
+\textbf{Base $n=1$:} $1/2=\frac{1}{2}$.  
+\textbf{IH:} Assume $\sum_{k=1}^n \frac{1}{k(k+1)}=\frac{n}{n+1}$.  
+\textbf{Step:}
+\[
+\sum_{k=1}^{n+1}\frac{1}{k(k+1)}
+=\frac{n}{n+1}+\frac{1}{(n+1)(n+2)}
+=\frac{n(n+2)+1}{(n+1)(n+2)}
+=\frac{n+1}{n+2}.
+\]
+Thus the formula holds for all $n\ge1$. 
+
+\end{enumerate}
+
+\end{document}
