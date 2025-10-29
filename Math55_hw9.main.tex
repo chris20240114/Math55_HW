@@ -1,0 +1,151 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{enumitem}
+\setlist[enumerate]{itemsep=0.3em, topsep=0.3em}
+\setlist[itemize]{itemsep=0.2em, topsep=0.2em}
+\newcommand{\ds}{\displaystyle}
+\newtheorem{claim}{Claim}
+
+\begin{document}
+
+\begin{center}
+{\Large \textbf{Math 55 — HW 9}}\\[6pt]
+\end{center}
+
+\vspace{0.75em}
+\noindent \textbf{Due on Gradescope Wednesday, Oct. 29, 8pm}
+
+\bigskip
+\noindent \textbf{Problems from Rosen}
+
+\medskip
+\noindent \textbf{Section 5.3}
+\begin{itemize}
+    \item[12.] Prove that $f_1^2 + f_2^2 + \ldots + f_n^2 = f_n f_{n+1}$ when $n$ is a positive integer.
+
+    \medskip\textit{Answer:}
+    We prove by induction on $n$. For $n=1$, $f_1^2=1=f_1 f_2$ since $f_1=f_2=1$. Assume the identity holds for $n=k$:
+    \[
+      \sum_{i=1}^k f_i^2 = f_k f_{k+1}.
+    \]
+    Then
+    \[
+      \sum_{i=1}^{k+1} f_i^2
+      = \Big(\sum_{i=1}^k f_i^2\Big)+f_{k+1}^2
+      = f_k f_{k+1} + f_{k+1}^2
+      = f_{k+1}(f_k+f_{k+1})
+      = f_{k+1} f_{k+2},
+    \]
+    using $f_{k+2}=f_{k+1}+f_k$. Thus the statement holds for $k+1$. By induction it holds for all $n\ge1$.
+
+    \item[14.] Show that $f_{n+1} f_{n-1} - f_n^{2} = (-1)^n$ when $n$ is a positive integer.
+
+    \medskip\textit{Answer:}
+    Use Cassini’s identity. For $n=1$: $f_2 f_0 - f_1^2 = 1\cdot0-1=-1=(-1)^1$.
+    Assume $f_{k+1}f_{k-1}-f_k^2=(-1)^k$ for some $k\ge1$. Then
+    \[
+    \begin{aligned}
+      f_{k+2}f_k - f_{k+1}^2
+        &= (f_{k+1}+f_k)f_k - f_{k+1}^2 \\
+        &= -\big(f_{k+1}^2 - f_{k+1}f_k - f_k^2\big) \\
+        &= -\big(f_{k+1}(f_{k+1}-f_k) - f_k^2\big) \\
+        &= -\big(f_{k+1}f_{k-1} - f_k^2\big) \\
+        &= -(-1)^k = (-1)^{k+1},
+    \end{aligned}
+    \]
+    where we used $f_{k-1}=f_{k+1}-f_k$. This completes the induction.
+\end{itemize}
+
+\noindent \textbf{Section 6.1}
+\begin{itemize}
+    \item[18.] How many 5-element DNA sequences
+    \begin{enumerate}[label=(\alph*)]
+        \item end with A?
+        \item start with T and end with G?
+        \item contain only A and T?
+        \item do not contain C?
+    \end{enumerate}
+
+    \medskip\textit{Answer:}
+    The DNA alphabet is $\{A,C, G, T\}$ (4 symbols).
+    \begin{enumerate}[label=(\alph*)]
+        \item Fix last symbol to A (1 choice); the first four positions are arbitrary (4 choices each): $4^4=256$.
+        \item Fix first to T and last to G (1 choice each); remaining three positions arbitrary: $4^3=64$.
+        \item Only A or T allowed in all five positions: $2^5=32$.
+        \item Exclude C; allowed symbols $\{A,G,T\}$ in each of five positions: $3^5=243$.
+    \end{enumerate}
+
+    \item[24.] How many positive integers between 1000 and 9999 inclusive
+    \begin{enumerate}[label=(\alph*)]
+        \setcounter{enumi}{2}
+        \item have distinct digits?
+        \setcounter{enumi}{4}
+        \item are divisible by 5 or 7?
+        \item are not divisible by either 5 or 7?
+        \item are divisible by 5 but not by 7?
+        \item are divisible by 5 and 7?
+    \end{enumerate}
+
+    \medskip\textit{Answer:}
+    There are $9000$ four-digit integers in total (from 1000 to 9999).
+    \begin{enumerate}[label=(\alph*)]
+        \setcounter{enumi}{2}
+        \item Distinct digits: $9$ choices for the thousands (1--9), then $9$ for hundreds (0--9 except the thousands digit), then $8$, then $7$. Total $9\cdot9\cdot8\cdot7=4536$.
+        \setcounter{enumi}{4}
+        \item By inclusion–exclusion: multiples of $5$: $\lfloor 9999/5 \rfloor-\lfloor 999/5 \rfloor = 1999-199=1800$. Multiples of $7$: $\lfloor 9999/7 \rfloor-\lfloor 999/7 \rfloor = 1428-142=1286$. Multiples of $35$: $\lfloor 9999/35 \rfloor-\lfloor 999/35 \rfloor = 285-28=257$. Hence $1800+1286-257=2829$.
+        \item Not divisible by $5$ nor $7$: $9000-2829=6171$.
+        \item Divisible by $5$ but not by $7$: $1800-257=1543$.
+        \item Divisible by both $5$ and $7$ (i.e., by $35$): $257$.
+    \end{enumerate}
+
+    \item[48.] In how many ways can a photographer at a wedding arrange 6 people in a row from a group of 10 people, where the bride and the groom are among these 10 people, if
+    \begin{enumerate}[label=(\alph*)]
+        \item the bride must be in the picture?
+        \item both the bride and groom must be in the picture?
+        \item exactly one of the bride and the groom is in the picture?
+    \end{enumerate}
+
+    \medskip\textit{Answer:}
+    Each selected set of 6 distinct people can be ordered in $6!$ ways.
+    \begin{enumerate}[label=(\alph*)]
+        \item Include the bride and choose the other $5$ from the remaining $9$: $\binom{9}{5}6! = 126\cdot720 = 90{,}720$.
+        \item Include both bride and groom and choose the other $4$ from the remaining $8$: $\binom{8}{4}6! = 70\cdot720 = 50{,}400$.
+        \item Choose exactly one of the two (2 ways), then choose the other $5$ from the $8$ non-spouses: $2\binom{8}{5}6! = 2\cdot56\cdot720 = 80{,}640$.
+    \end{enumerate}
+
+    \item[76.] Use mathematical induction to prove the product rule for $m$ tasks from the product rule for two tasks.
+
+    \medskip\textit{Answer:}
+    Our claim: If task $i$ can be performed in $n_i$ ways for $i=1,2,\dots,m$, and the tasks are independent (choices for one do not affect others), then the number of ways to perform all $m$ tasks in sequence is $\prod_{i=1}^m n_i$.
+
+    \emph{Base $m=2$.} Given as the standard product rule: $n_1 n_2$.
+
+    \emph{Inductive step.} Assume true for some $m=k$: any $k$ tasks can be completed in $\prod_{i=1}^k n_i$ ways. For $k+1$ tasks, first complete the initial $k$ tasks (by the IH in $\prod_{i=1}^k n_i$ ways). For each such outcome there are $n_{k+1}$ ways to complete task $k+1$. Hence total $\big(\prod_{i=1}^k n_i\big) n_{k+1} = \prod_{i=1}^{k+1} n_i$. This establishes the rule for all $m\ge2$.
+\end{itemize}
+
+\pagebreak
+\noindent \textbf{Additional Problems}
+\begin{enumerate}
+    \item What is wrong with the following proof that for all $n \ge 3$, we can form postage of $n$ cents using only 3 and 4 cent stamps?
+
+    \medskip
+    \noindent\emph{“Proof:”} For $n = 3$, we can use one 3 cent stamp. For $n > 3$, assume by induction that we can form postage of $n-1$ cents. Then we can form postage of $n$ cents by replacing one 3 cent stamp with a 4 cent stamp, or by replacing two 4 cent stamps with three 3 cent stamps.
+
+    \medskip\emph{Answer: }
+    The induction hypothesis does not guarantee that the $n-1$-cent configuration contains a 3-cent stamp (needed to “replace by a 4”), nor two 4-cent stamps (needed to “replace by three 3s”). For example, $n-1=6$ can be made as $3+3$ (no 4-cent stamp to replace), and $n-1=8$ can be $4+4$ (no 3-cent stamp). Thus the step is invalid: it assumes extra structure not ensured by the hypothesis. A correct proof would use strong induction showing that any amount $\ge 6$ can be formed, handling small bases (3,4,6,7) and then adding 3 or 4 appropriately.
+
+    \item For any set $S$ and any function $f: S \to S$, define $f^{(0)}(x)=x$ and $f^{(n)}(x)=f(f^{(n-1)}(x))$ for $n>0$.
+    \begin{enumerate}[label=(\alph*)]
+        \item For $f(x)=x^2$ on $\mathbb{R}$, find a formula for $f^{(n)}(x)$ and prove it.
+
+        \emph{Answer: } We claim $f^{(n)}(x)=x^{2^n}$. Proof by induction on $n$: Base $n=0$: $x^{2^0}=x=f^{(0)}(x)$. Assume true for $n=k$. Then $f^{(k+1)}(x)=f(f^{(k)}(x))=(x^{2^k})^2=x^{2^{k+1}}$.
+
+        \item Prove that for any $m,n\ge0$, $f^{(m+n)}(x)=f^{(m)}(f^{(n)}(x))$.
+
+        \emph{Answer: } Fix $n$ and prove by induction on $m$. Base $m=0$: $f^{(n)}(x)=f^{(0)}(f^{(n)}(x))$. Assume $f^{(m+n)}=f^{(m)}\circ f^{(n)}$. Then $f^{(m+1+n)}=f(f^{(m+n)})=f\big(f^{(m)}(f^{(n)}(x))\big)=(f^{(m+1)}\circ f^{(n)})(x)$. Thus the identity holds for all $m,n$.
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
